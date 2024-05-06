@@ -95,24 +95,28 @@ system("CLS");
     		printf("錯誤，請重新輸入");
     		printf("請輸入字元1~9\n");
 		}
-	else if((c=='C'||c=='c'))
+	}
+	else if(c=='C'||c=='c')
 	{
+		system("CLS");
 		printf("Continue?(y/n)\n");
+		fflush(stdin);
 		scanf("%c",&end);
 		if(end=='Y'||end=='y')
 		{
-			return 1;
+			printf("繼續\n");
 		}
 		else if(end=='N'||end=='n')
 		{
+			printf("結束\n");
 			break;
 		}
 		else
 		{
-			printf("錯誤，請重新輸入");
+			printf("錯誤，請重新輸入\n");
 		}
 		}	
-	}
+	
 }
 	return 0;
 } 
