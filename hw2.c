@@ -54,7 +54,7 @@ system("CLS");
     printf("/   c. 結束                       /\n");
     printf("+++++++++++++++++++++++++++++++++++\n");
     
-    char c,input;
+    char c,input,end;
     printf("請輸入一個字元\n");
     fflush(stdin);
     scanf("%c",&c);
@@ -83,6 +83,35 @@ system("CLS");
 			}
 			printf("\n");
 		}
+	}
+	else if(c=='B'||c=='b')
+	{
+		system("CLS");
+    	printf("請輸入字元1~9\n");
+    	fflush(stdin);
+    	scanf("%d",&input);
+    	if(input<'1'&&input>'9')
+    	{
+    		printf("錯誤，請重新輸入");
+    		printf("請輸入字元1~9\n");
+		}
+	else if((c=='C'||c=='c'))
+	{
+		printf("Continue?(y/n)\n");
+		scanf("%c",&end);
+		if(end=='Y'||end=='y')
+		{
+			return 1;
+		}
+		else if(end=='N'||end=='n')
+		{
+			break;
+		}
+		else
+		{
+			printf("錯誤，請重新輸入");
+		}
+		}	
 	}
 }
 	return 0;
