@@ -46,7 +46,7 @@ int main(void){
 }
 system("PAUSE");
 system("CLS");
-    while(1)
+    while(1)//開始進入主選單 
 {
 	printf("+++++++++++++++++++++++++++++++++++\n");
     printf("/   a. 劃出直角三角形             /\n");
@@ -56,10 +56,10 @@ system("CLS");
     
     int number;
 	char c,input,end;
-    printf("請輸入一個字元\n");
+    printf("請輸入一個字元\n");//選擇進入選項 
     fflush(stdin);
     scanf("%c",&c);
-    if(c=='A'||c=='a'){
+    if(c=='A'||c=='a'){//劃出直角三角形 
     	system("CLS");
     	printf("請輸入字元a~n\n");
     	fflush(stdin);
@@ -80,7 +80,7 @@ system("CLS");
 			printf("\n");
 		}
 	}
-	else if(c=='B'||c=='b')
+	else if(c=='B'||c=='b')//乘法表 
 	{
 		system("CLS");
     	printf("請輸入字元1~9\n");
@@ -98,7 +98,7 @@ system("CLS");
 			}
 		}
 	}
-	else if(c=='C'||c=='c')
+	else if(c=='C'||c=='c')//是否要結束 
 	{
 		system("CLS");
 		printf("Continue?(y/n)\n");
@@ -123,3 +123,5 @@ system("CLS");
 }
 	return 0;
 } 
+
+//這次的作業要用很多的迴圈來完成,而且一旦迴圈有問題,跑出來的結果就完全不一樣,不過對迴圈的理解也比較深入了,雖然過程麻煩又複雜,但成果出來的畫面還是很有成就感的,當然,git還是非常的難使用. 
