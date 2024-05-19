@@ -31,7 +31,62 @@ void RandomSeats(char seats[9][9], int numBookings) {
         }
     }
 }
-
+void suggestSeats(char seats[9][9], int numSeats) {
+    int row, col, found = 0;
+    if (numSeats >= 1 && numSeats <= 3) {
+        while (!found) {
+            row = rand() % 9;
+            col = rand() % (10 - numSeats); // Ensure there's enough space for numSeats seats in the row
+            found = 1;
+            for ( i = 0; i < numSeats; i++) {
+                if (seats[row][col + i] != '-') {
+                    found = 0;
+                    break;
+                }
+            }
+            if (found) {
+                for ( i = 0; i < numSeats; i++) {
+                    seats[row][col + i] = '@';
+                }
+            }
+        }
+    } else if (numSeats == 4) {
+        while (!found) {
+            row = rand() % 9;
+            col = rand() % (10 - numSeats); // Ensure there's enough space for 4 seats in the row
+            if (rand() % 2) { // 50% chance to choose same row or adjacent rows
+                found = 1;
+                for ( i = 0; i < numSeats; i++) {
+                    if (seats[row][col + i] != '-') {
+                        found = 0;
+                        break;
+                    }
+                }
+                if (found) {
+                    for ( i = 0; i < numSeats; i++) {
+                        seats[row][col + i] = '@';
+                    }
+                }
+            } else {
+                if (row < 8) { // Ensure there's a row below for adjacent row option
+                    found = 1;
+                    for ( i = 0; i < 2; i++) {
+                        if (seats[row][col + i] != '-' || seats[row + 1][col + i] != '-') {
+                            found = 0;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        for ( i = 0; i < 2; i++) {
+                            seats[row][col + i] = '@';
+                            seats[row + 1][col + i] = '@';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 int main(void) {
@@ -100,7 +155,7 @@ int main(void) {
         printf("/     d. Exit                     /\n");
         printf("+++++++++++++++++++++++++++++++++++\n");
 
-        int n, initialized = 0, e = 0, f = 0;
+        int n, initialized = 0, e = -1, f = -1;
         char input, end;
         printf("請輸入a,b,c,d\n");
         fflush(stdin);
@@ -117,14 +172,38 @@ int main(void) {
             printf("請問是1~4位?\n");
             fflush(stdin);
             scanf("%d", &n);
-            if (n >= 1 && n <= 3) {
-                // Placeholder for arranging seats for the user
-            }
+            if (n >= 1 && n <= 4) {
+                suggestSeats(seats, n);
+                Seats(seats);
+                printf("是否滿意這個安排? (y/n)\n");
+                fflush(stdin);
+                scanf(" %c", &end);
+                if (end == 'Y' || end == 'y') {
+                    system("CLS");
+                    for ( i = 0; i < 9; i++) {
+                        for ( j = 0; j < 9; j++) {
+                            if (seats[i][j] == '@') {
+                                seats[i][j] = '*';
+                            }
+                        }
+                    }
+                } else if(end == 'N' || end == 'n') {
+                    system("CLS");
+    					for ( i = 0; i < 9; i++) {
+        					for ( j = 0; j < 9; j++) {
+            					if (seats[i][j] == '@') {
+                					seats[i][j] = '-';
+                				}
+                			}
+                		}
+                	}
+                }
         } else if (input == 'c') {
             while (1) {
                 printf("請選擇想要的座位 (例如 1-2):\n");
                 fflush(stdin);
-                scanf("%d-%d", &e, &f);
+                e=0,f=0;
+				scanf("%d-%d", &e, &f);
                 if (e >= 1 && e <= 9 && f >= 1 && f <= 9) {
                     if (seats[e - 1][f - 1] == '-' || seats[e - 1][f - 1] == '@') {
                         seats[e - 1][f - 1] = '@';
