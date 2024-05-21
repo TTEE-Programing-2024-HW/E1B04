@@ -36,7 +36,7 @@ void suggestSeats(char seats[9][9], int numSeats) {
     if (numSeats >= 1 && numSeats <= 3) {
         while (!found) {
             row = rand() % 9;
-            col = rand() % (10 - numSeats); // Ensure there's enough space for numSeats seats in the row
+            col = rand() % (10 - numSeats); // 確保有足夠的排數 
             found = 1;
             for ( i = 0; i < numSeats; i++) {
                 if (seats[row][col + i] != '-') {
@@ -155,7 +155,7 @@ int main(void) {
         printf("/     d. Exit                     /\n");
         printf("+++++++++++++++++++++++++++++++++++\n");
 
-        int n, initialized = 0, e = -1, f = -1;
+        int n, initialized = 0;
         char input, end;
         printf("請輸入a,b,c,d\n");
         fflush(stdin);
