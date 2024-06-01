@@ -8,11 +8,24 @@ typedef struct{
 	float math;
 	float physics;
 	float english;
-	float avg;
+	float average;
 }Student;
-void A(Student *students, int n) {
-    int i;
-	for ( i = 0; i < n; ++i) {
+void A(Student *students, int *n) {
+    int k=0;
+    system("CLS");
+    printf("Welcome! Please enter an integer between 5 and 10.\n");
+    while (1) {
+    	printf("Enter the number of students (5-10): ");
+        scanf("%d", &k);
+        if (k >= 1 && k <= 10) {
+            break;
+        } 
+		else {
+            printf("Invalid number. Please enter an integer between 5 and 10.\n");
+        }
+    }
+	int i;
+	for ( i = 0; i < k; ++i) {
         printf("Enter data for student %d:\n", i + 1);
         
         printf("Name: ");
@@ -21,7 +34,7 @@ void A(Student *students, int n) {
         while (1) {
             printf("ID (6-digit integer): ");
             scanf("%d", &students[i].id);
-            if (students[i].id >= 100000 && students[i].id <= 999999) {
+            if (students[i].id >= 000001 && students[i].id <= 999999) {
                 break;
             } else {
                 printf("Invalid ID. Please enter a 6-digit integer.\n");
@@ -30,7 +43,8 @@ void A(Student *students, int n) {
 
         while (1) {
             printf("Math score (0-100): ");
-            scanf("%d", &students[i].math);
+            fflush(stdin);
+            scanf("%f", &students[i].math);
             if (students[i].math >= 0 && students[i].math <= 100) {
                 break;
             } else {
@@ -40,7 +54,8 @@ void A(Student *students, int n) {
 
         while (1) {
             printf("Physics score (0-100): ");
-            scanf("%d", &students[i].physics);
+            fflush(stdin);
+            scanf("%f", &students[i].physics);
             if (students[i].physics >= 0 && students[i].physics <= 100) {
                 break;
             } else {
@@ -50,15 +65,35 @@ void A(Student *students, int n) {
 
         while (1) {
             printf("English score (0-100): ");
-            scanf("%d", &students[i].english);
+            fflush(stdin);
+            scanf("%f", &students[i].english);
             if (students[i].english >= 0 && students[i].english <= 100) {
                 break;
             } else {
                 printf("Invalid score. Please enter a score between 0 and 100.\n");
             }
         }
+        students[i].average = (students[i].math + students[i].physics + students[i].english) / 3.0;
     }
+    (*n)+=k;
 };
+void B(Student *students, int n) {
+    system("CLS");
+    int i;
+    for ( i = 0; i < n; ++i) {
+        printf("Student %d:\n", i + 1);
+        printf("Name: %s\n", students[i].name);
+        printf("ID: %d\n", students[i].id);
+        printf("Math score: %d\n", students[i].math);
+        printf("Physics score: %d\n", students[i].physics);
+        printf("English score: %d\n", students[i].english);
+        printf("Average score: %.1f\n\n", students[i].average);
+    }
+    printf("Press any key to return to the main menu...");
+    getchar();  // 单ヴ種龄
+    getchar();  // 块计临Τ摧痙传︽才
+    system("CLS");
+}
 
 int main(void) {
     printf("                                           \n");
@@ -105,6 +140,8 @@ int main(void) {
 	system("PAUSE");
     system("CLS");
 	
+	Student students[50];
+	int n=0;
 	while (1) {
         printf("+++++++++++++++++++++++++++++++++++\n");
         printf("/        Main   menu              /\n");
@@ -119,29 +156,23 @@ int main(void) {
         	fflush(stdin);
         	scanf("%c", &input);
         switch(input){
-			case 'a':{
-				int n;
-    			system("CLS");
-    			printf("Welcome! Please enter an integer between 5 and 10.\n");
-    				while (1) {
-        				printf("Enter the number of students (5-10): ");
-        				scanf("%d", &n);
-        				if (n >= 5 && n <= 10) {
-            				break;
-        				} 
-						else {
-            				printf("Invalid number. Please enter an integer between 5 and 10.\n");
-        				}
-    				}
-    		Student *students = (Student *)malloc(n * sizeof(Student));
-    				if (students == NULL) {
-        			printf("Memory allocation failed!\n");
-        			return 1;
-    				}
-    			A(students, n);
+			case 'a':{				
+    			A(students,&n);
 					break;
 				}
-        	
+        	case 'b':{
+        		if (students == NULL) {
+                printf("No student data available. Please enter student data first.\n");
+                printf("Press any key to return to the main menu...");
+                getchar();
+                getchar();
+            } else {
+                B(students, n);
+                system("PAUSE");
+    			system("CLS");
+            	}
+				break;
+			}
         	case 'e':{
 				system("CLS");
             	printf("Continue? (y/n)\n");
