@@ -17,7 +17,7 @@ void A(Student *students, int *n) {
     while (1) {
     	printf("Enter the number of students (5-10): ");
         scanf("%d", &k);
-        if (k >= 1 && k <= 10) {
+        if (k >= 5 && k <= 10) {
             break;
         } 
 		else {
