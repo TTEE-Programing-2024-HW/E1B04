@@ -84,11 +84,42 @@ void B(Student *students, int n) {
         printf("Student %d:\n", i + 1);
         printf("Name: %s\n", students[i].name);
         printf("ID: %d\n", students[i].id);
-        printf("Math score: %d\n", students[i].math);
-        printf("Physics score: %d\n", students[i].physics);
-        printf("English score: %d\n", students[i].english);
+        printf("Math score: %.1f\n", students[i].math);
+        printf("Physics score: %.1f\n", students[i].physics);
+        printf("English score: %.1f\n", students[i].english);
         printf("Average score: %.1f\n\n", students[i].average);
     }
+    printf("Press any key to return to the main menu...");
+    getchar();  // 单ヴ種龄
+    getchar();  // 块计临Τ摧痙传︽才
+    system("CLS");
+}
+void C(Student *students, int n) {
+    system("CLS");
+    char search_name[50];
+    printf("Enter the name of the student to search: ");
+    scanf("%s", search_name);
+
+    int found = 0;
+    int i;
+	for ( i = 0; i < n; ++i) {
+        if (strcmp(students[i].name, search_name) == 0) {
+            printf("Student found:\n");
+            printf("Name: %s\n", students[i].name);
+            printf("ID: %d\n", students[i].id);
+            printf("Math score: %.1f\n", students[i].math);
+            printf("Physics score: %.1f\n", students[i].physics);
+            printf("English score: %.1f\n", students[i].english);
+            printf("Average score: %.1f\n", students[i].average);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Student not found.\n");
+    }
+
     printf("Press any key to return to the main menu...");
     getchar();  // 单ヴ種龄
     getchar();  // 块计临Τ摧痙传︽才
@@ -172,6 +203,20 @@ int main(void) {
     			system("CLS");
             	}
 				break;
+			}
+			case 'c':{
+				if (students == NULL) {
+                printf("No student data available. Please enter student data first.\n");
+                printf("Press any key to return to the main menu...");
+                getchar();
+                getchar();
+            	} 
+				else {
+                C(students, n);
+                system("PAUSE");
+    			system("CLS");
+    			break;
+            	}
 			}
         	case 'e':{
 				system("CLS");
