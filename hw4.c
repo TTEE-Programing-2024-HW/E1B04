@@ -125,6 +125,24 @@ void C(Student *students, int n) {
     getchar();  // 因為上面輸入的數字還有一個殘留的換行符
     system("CLS");
 }
+int compare(const void *a, const void *b) {
+    float avgA = ((Student *)a)->average;
+    float avgB = ((Student *)b)->average;
+    return (avgA < avgB) - (avgA > avgB);  // 由大到小排序
+}
+void D(Student *students, int n) {
+    system("CLS");
+    int i;
+    qsort(students, n, sizeof(Student), compare);
+    printf("Students sorted by average score:\n");
+    for ( i = 0; i < n; ++i) {
+        printf("Name: %s, ID: %d, Average score: %.1f\n", students[i].name, students[i].id, students[i].average);
+	}
+    printf("Press any key to return to the main menu...");
+    getchar();  // 等待按下任意鍵
+    getchar();  // 因為上面輸入的數字還有一個殘留的換行符
+    system("CLS");
+}
 
 int main(void) {
     printf("                ████████            █████████               \n");
@@ -206,17 +224,29 @@ int main(void) {
 			}
 			case 'c':{
 				if (students == NULL) {
-                printf("No student data available. Please enter student data first.\n");
-                printf("Press any key to return to the main menu...");
-                getchar();
-                getchar();
+                	printf("No student data available. Please enter student data first.\n");
+                	printf("Press any key to return to the main menu...");
+                	getchar();
+                	getchar();
             	} 
 				else {
-                C(students, n);
-                system("PAUSE");
-    			system("CLS");
-    			break;
+                	C(students, n);
+                	system("PAUSE");
+    				system("CLS");
+    				break;
             	}
+			}
+			case 'd':{
+				if (students == NULL) {
+                	printf("No student data available. Please enter student data first.\n");
+                	printf("Press any key to return to the main menu...");
+                	getchar();
+                	getchar();
+            	} 	
+				else{
+                	D(students, n);
+					break;
+            	}				
 			}
         	case 'e':{
 				system("CLS");
